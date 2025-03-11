@@ -173,3 +173,63 @@ For more information on a specific command, use:
 ```bash
 python querries-db.py COMMAND --help
 ```
+
+# Steam Database Creator
+
+This script fetches data from the Steam API and stores it in a SQLite database.
+
+## Requirements
+
+- Python 3.6+
+- Required packages listed in `requirements.txt`
+
+## Installation
+
+1. Clone this repository or download the files
+2. Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+Simply run the script:
+
+```bash
+python create_steam_db.py
+```
+
+This will:
+1. Create a SQLite database file named `steam_db.db` if it doesn't exist
+2. Fetch the list of all Steam apps from the Steam API
+3. Store the app IDs and names in the database
+
+## Database Structure
+
+The database contains a single table named `apps` with the following columns:
+
+- `appid` (INTEGER): The unique identifier for the Steam app (primary key)
+- `name` (TEXT): The name of the Steam app
+- `last_updated` (TIMESTAMP): When the record was last updated
+
+## Accessing the Data
+
+You can access the data using any SQLite client or with Python:
+
+```python
+import sqlite3
+
+# Connect to the database
+conn = sqlite3.connect('steam_db.db')
+cursor = conn.cursor()
+
+# Example: Query all apps
+cursor.execute("SELECT * FROM apps LIMIT 10")
+apps = cursor.fetchall()
+for app in apps:
+    print(app)
+
+# Close the connection
+conn.close()
+```
