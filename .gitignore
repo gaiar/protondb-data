@@ -1,0 +1,7 @@
+*.log
+*.db
+*.json
+*.tar.gz
+*.json.gz
+*.json.tar.gz
+*.json.tar.gz.part
